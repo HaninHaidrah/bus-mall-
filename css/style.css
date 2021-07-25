@@ -1,0 +1,13 @@
+main #displayPics img  {
+    display: inline-block;
+    margin-top: 5%;
+    width: 100px;
+    height: 200px;
+    margin-right: 10%;
+}
+
+main #displayPics{
+    margin-right: 20%;
+    margin-left: 20%;
+    margin-top: 10%;
+}
