@@ -11,3 +11,65 @@ main #displayPics{
     margin-left: 20%;
     margin-top: 10%;
 }
+main div{
+    position: relative;
+}
+main h2{
+padding: 10px;
+position: absolute;
+top: 20%;
+right:34%;
+font-size: 30px;
+color: rgb(5, 80, 82);
+/* background-color:darksalmon; */
+}
+main p{
+    padding: 10px;
+    position: absolute;
+    top: 30%;
+    left:11%;
+    font-size: 20px;
+    color: rgb(21, 80, 82);
+    /* background-color:darksalmon; */
+    }
+body{
+    background-color: cornsilk;
+    margin-left: 7%;
+    margin-right: 7%;
+}
+header{
+    background-color: rgb(0, 54, 56);
+    margin-left: 5%;
+    margin-right: 5%;
+    height: 100px;
+}
+header h1{
+    font-family: 'Times New Roman', Times, serif;
+    font-size: xx-large;
+    text-align: center;
+    margin-right: 20%;
+    margin-left: 20%;
+    margin-top: 5%;
+    padding-top: 2%;
+color: whitesmoke;
+}
+button {
+    background-color: rgb(83, 184, 187); /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    position: absolute;
+    bottom: 30%;
+  }
+
+  li{
+      padding: 2%;
+      position: relative;
+      bottom: 20%;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 20;
+  }

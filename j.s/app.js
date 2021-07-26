@@ -62,15 +62,21 @@ function render() {
         rightSide = randomPics();
     }
     leftPicElement.src = Product.all[leftSide].sorcePro;
+    Product.all[leftSide].shown++
+
     midPicElement.src = Product.all[midSide].sorcePro;
+    Product.all[midSide].shown++
+
     rightPicElement.src = Product.all[rightSide].sorcePro;
+    Product.all[rightSide].shown++
+
 
 
 }
 render();
 
 let tries = 0;
-let maxTries = 10;
+let maxTries = 26;
 
 
 let parent = document.getElementById('displayPics')
@@ -86,7 +92,6 @@ function toDo(event) {
 
         if (event.target.id === 'left-side') {
             Product.all[leftSide].vote++
-            Product.all[leftSide].shown++
             console.log(event.target.id)
 
 
@@ -96,13 +101,11 @@ function toDo(event) {
         else if (event.target.id === 'mid-side') {
 
             Product.all[midSide].vote++
-            Product.all[leftSide].shown++
 
         }
 
         else if (event.target.id === 'right-side') {
             Product.all[rightSide].vote++
-            Product.all[leftSide].shown++
 
         }
         else {
@@ -125,8 +128,8 @@ function toDo(event) {
 
                 let list = document.createElement('li')
                 listed.appendChild(list)
-                list.textContent = `${Product.all[i].proName} had ${Product.all[i].vote} , and was seen ${Product.all[i].shown}`
-                // console.log(showResults)
+                list.textContent = `${Product.all[i].proName} had ${Product.all[i].vote} votes , and was seen ${Product.all[i].shown} times`
+                console.log(Product.all[i].shown)
             }
 
         }
