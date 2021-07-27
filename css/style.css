@@ -11,14 +11,14 @@ main #displayPics{
     margin-left: 20%;
     margin-top: 10%;
 }
-main div{
+main div :first-child{
     position: relative;
 }
 main h2{
 padding: 10px;
 position: absolute;
 top: 20%;
-right:34%;
+left:35%;
 font-size: 30px;
 color: rgb(5, 80, 82);
 /* background-color:darksalmon; */
@@ -73,3 +73,6 @@ button {
       font-family: Arial, Helvetica, sans-serif;
       font-size: 20;
   }
+
+
+  

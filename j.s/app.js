@@ -1,11 +1,20 @@
 'use strict'
 
+let productsName = [];
+let votesNum = [];
+let showsNum = [];
+let array=[];
+
+let buttonSign = document.getElementById('showResult')
+console.log(buttonSign)
+
 function Product(name, src) {
 
     this.proName = name;
     this.sorcePro = src;
     this.shown = 0;
     this.vote = 0;
+    productsName.push(this.proName)
     Product.all.push(this)
 
 
@@ -55,12 +64,19 @@ function render() {
     leftSide = randomPics();
     midSide = randomPics();
     rightSide = randomPics();
-
-    while (leftSide === midSide || leftSide === rightSide || midSide === rightSide) {
+    while (leftSide === midSide || leftSide === rightSide || midSide === rightSide||array.includes(leftSide)||array.includes(rightSide)||array.includes(midSide) ){
 
         leftSide = randomPics()
         rightSide = randomPics();
+        midSide=randomPics()
+
     }
+
+array=[leftSide,midSide,rightSide]
+console.log(array)
+
+
+
     leftPicElement.src = Product.all[leftSide].sorcePro;
     Product.all[leftSide].shown++
 
@@ -72,71 +88,122 @@ function render() {
 
 
 
-}
-render();
+    }
 
-let tries = 0;
-let maxTries = 26;
+    render();
 
-
-let parent = document.getElementById('displayPics')
-parent.addEventListener('click', toDo)
-// console.log(parent.addEventListener)
-
-function toDo(event) {
-
-    tries++
-    
-
-    if (tries < maxTries) {
-
-        if (event.target.id === 'left-side') {
-            Product.all[leftSide].vote++
-            console.log(event.target.id)
+    let tries = 0;
+    let maxTries = 26;
 
 
-            // console.log(Product.all[leftSide])
-        }
+    let parent = document.getElementById('displayPics')
+    parent.addEventListener('click', toDo)
+    // console.log(parent.addEventListener)
 
-        else if (event.target.id === 'mid-side') {
+    function toDo(event) {
 
-            Product.all[midSide].vote++
+        tries++
 
-        }
+        if (tries < maxTries) {
 
-        else if (event.target.id === 'right-side') {
-            Product.all[rightSide].vote++
+            if (event.target.id === 'left-side') {
+                Product.all[leftSide].vote++
+                console.log(event.target.id)
+                render()
+
+                // console.log(Product.all[leftSide])
+            }
+
+            else if (event.target.id === 'mid-side') {
+
+                Product.all[midSide].vote++
+                render()
+
+            }
+
+            else if (event.target.id === 'right-side') {
+                Product.all[rightSide].vote++
+                render()
+
+            }
+            else {
+
+                alert(`please choose from images`)
+                tries--;
+
+            }
+            // render();
 
         }
         else {
 
-            alert(`please choose from images`)
-            
-        }
-        render();
+            buttonSign.hidden = false;
+            // parent.removeEventListener('click', toDo);
+            buttonSign.addEventListener('click', showResults)
+            function showResults() {
 
-    }
-    else {
-        parent.removeEventListener('click', toDo);
-        let button = document.getElementById('showResult')
-        button.addEventListener('click', showResults)
-        console.log(button)
-        function showResults() {
+                let listed = document.getElementById('listed')
+                for (let i = 0; i < Product.all.length; i++) {
 
-            let listed = document.getElementById('listed')
-            for (let i = 0; i < Product.all.length; i++) {
+                    let list = document.createElement('li')
+                    listed.appendChild(list)
+                    list.textContent = `${Product.all[i].proName} had ${Product.all[i].vote} votes , and was seen ${Product.all[i].shown} times`
+                    console.log(Product.all[i].shown)
 
-                let list = document.createElement('li')
-                listed.appendChild(list)
-                list.textContent = `${Product.all[i].proName} had ${Product.all[i].vote} votes , and was seen ${Product.all[i].shown} times`
-                console.log(Product.all[i].shown)
+                }
+                buttonSign.removeEventListener('click', showResults)
             }
 
+            for (let i = 0; i < Product.all.length; i++) {
+                votesNum.push(Product.all[i].vote)
+                showsNum.push(Product.all[i].shown)
+
+            }
+
+            parent.removeEventListener('click', toDo)
+            renderTheChart()
         }
-
-
-
-
+        tries++
     }
 
-}
+    function renderTheChart() {
+        const data = {
+            labels: productsName,
+            datasets: [{
+                label: 'Votes',
+                data: votesNum,
+                backgroundColor: 'rgb(246, 174, 153)',
+                borderColor: 'rgb(185, 122, 149)',
+                borderWidth: 1
+            },
+
+            {
+                label: 'Shown',
+                data: showsNum,
+                backgroundColor: 'rgb(242, 225, 193)',
+                borderColor: 'rgb(113, 111, 129)',
+                borderWidth: 1
+            }]
+
+        };
+
+
+        const config = {
+            type: 'bar',
+            data: data,
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            },
+        };
+
+
+
+        var myChart = new Chart(
+            document.getElementById('myChart'),
+            config
+        );
+    }
