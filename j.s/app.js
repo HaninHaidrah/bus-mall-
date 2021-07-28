@@ -157,6 +157,7 @@ console.log(array)
             for (let i = 0; i < Product.all.length; i++) {
                 votesNum.push(Product.all[i].vote)
                 showsNum.push(Product.all[i].shown)
+                storedData()
 
             }
 
@@ -207,3 +208,29 @@ console.log(array)
             config
         );
     }
+
+
+    function storedData(){
+let storeObject= JSON.stringify(Product.all)
+localStorage.setItem('product',storeObject)
+console.log(storeObject)
+
+
+    }
+
+    function updateData(){
+
+let update=localStorage.getItem('product')
+console.log(update,'hi')
+let parseVote=JSON.parse(update)
+console.log(parseVote)
+if (parseVote!==null){
+
+    Product.all=parseVote
+
+}
+
+
+    }
+
+    updateData()
